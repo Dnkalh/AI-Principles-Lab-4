@@ -1,0 +1,42 @@
+?- house = house.
+true.
+% explanation: house matches house because they are the same atom.
+
+?- house = abc.
+false.
+% explanation: house and abc are different atoms, so they do not match.
+
+?- edge(a,b) = edge(C,b).
+C = a.
+% explanation: Both sides use the predicate edge with two arguments. The b values match, and C takes the value a.
+
+?- edge(a,d) = edge(C,B).
+C = a,
+B = d.
+% explanation: The two sides unify when C is a and B is d.
+
+?- edge(C,B) = edge(a,d).
+C = a,
+B = d.
+% explanation: The sides are switched, but they still match when C is a and B is d.
+
+?- edge(A,f(g,h)) = edge(a,B).
+A = a,
+B = f(g, h).
+% explanation: A takes the value a, and B matches the whole structure f(g,h).
+
+?- edge(A,A) = edge(b,c).
+false.
+% explanation: The same variable A appears twice, so both arguments must have the same value. It cannot be both b and c.
+
+?- edge(A,A) = edge(b,b).
+A = b.
+% explanation: Both arguments are b, so A can take that value in both places.
+
+?- A = B, B = f.
+A = B, B = f.
+% explanation: A and B become linked. When B takes the value f, A has that value too.
+
+?- A = B, B = f, A = e.
+false.
+% explanation: A and B are linked, so A must be f. It cannot also be e.
